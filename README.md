@@ -11,6 +11,7 @@ AstroYoga is a powerful and modern mobile application that brings together the r
 - **Jetpack Compose Frontend:** Enjoy a seamless and dynamic user experience with Jetpack Compose.
 
 - **Multi-Module Architecture:** Enhance maintainability and scalability with nested graphs for better organization.
+- **Jetpack Compose Frontend:** Enjoy a seamless and dynamic user experience with Jetpack Compose.
 
 - **User Profiles:** Create and customize profiles to receive tailored recommendations.
 
