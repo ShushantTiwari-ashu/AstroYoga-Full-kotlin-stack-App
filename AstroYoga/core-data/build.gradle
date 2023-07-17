@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2023 Shushant Tiwari.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
+
+import com.shushant.astroyoga.buildSrc.App
+import com.shushant.astroyoga.buildSrc.Deps
+
+plugins {
+    id "com.android.library"
+    id "kotlin-android"
+    id "kotlin-kapt"
+    id "kotlin-parcelize"
+    id "org.jetbrains.kotlin.plugin.serialization"
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdkVersion App.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion App.minSdkVersion
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation":
+                                      "$projectDir/schemas".toString()]
+            }
+        }
+
+    }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    namespace 'com.shushant.astroyoga.coreData'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    api project(Deps.Modules.CommonUiCompose)
+    api project(Deps.Modules.CoreNetwork)
+
+    api Deps.Android.Room.paging
+    api Deps.Kotlin.stdlib
+    api Deps.Koin.koinAndroid
+    implementation 'androidx.core:core-ktx:1.9.0'
+    kapt Deps.Android.Room.compiler
+    api Deps.Kotlin.serializationRuntime
+    api Deps.Android.dataStore
+    api Deps.Utils.sandwich
+    coreLibraryDesugaring Deps.Android.desugaring
+}

@@ -1,0 +1,88 @@
+/*
+ * Copyright (c) 2023 Shushant Tiwari.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+import com.shushant.astroyoga.buildSrc.App
+import com.shushant.astroyoga.buildSrc.Deps
+
+plugins {
+    id "com.android.library"
+    id "kotlin-android"
+    id "kotlin-kapt"
+    id "kotlin-parcelize"
+    id "org.jetbrains.kotlin.plugin.serialization"
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdkVersion App.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion App.minSdkVersion
+    }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        getByName("debug") {
+            def localProperties = new Properties()
+            localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+            resValue("string", "google_client_id", localProperties['GOOGLE_CLIENT_ID'])
+            resValue("string", "open_ai_key", localProperties['OPENAI_API_KEY'])
+            resValue("string", "base_url_ai", localProperties['OPEN_AI_BASE_URL'])
+            resValue("string", "maps_api_key", localProperties['MAPS_API_KEY'])
+        }
+    }
+    namespace 'com.shushant.astroyoga.network'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    api Deps.Kotlin.stdlib
+    api Deps.Koin.koinAndroid
+    api Deps.Kotlin.serializationRuntime
+    api Deps.Network.whatIf
+    api Deps.Network.retrofit
+    api Deps.Network.okhttpInterceptor
+    api Deps.Utils.sandwich
+    api Deps.Utils.timber
+    coreLibraryDesugaring Deps.Android.desugaring
+    api platform(Deps.Firebase.firebaseBom)
+    api Deps.Firebase.auth
+    api Deps.Firebase.authKtx
+    api Deps.Firebase.fireStore
+    api Deps.Firebase.analyticsKtx
+    api Deps.Firebase.fireStoreKtx
+    api Deps.Firebase.storageKtx
+    api Deps.Firebase.inappmessaging
+    api Deps.Firebase.crashlytics
+    api Deps.Firebase.databaseKtx
+    api Deps.Firebase.messagingKtx
+    api Deps.Firebase.serviceAuth
+
+    def ktor_version = '2.2.2'
+    api "io.ktor:ktor-client-core:$ktor_version"
+
+    api "io.ktor:ktor-client-android:$ktor_version"
+    api "io.ktor:ktor-client-serialization:$ktor_version"
+    api "io.ktor:ktor-client-content-negotiation:$ktor_version"
+    api "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
+    api "io.ktor:ktor-client-logging:$ktor_version"
+}

@@ -1,0 +1,12 @@
+rootProject.name = "AstroYoga"
+include ':astroyoga'
+include ':chatgpt'
+include ':navigation'
+include ':common-ui-compose'
+include ':core-data'
+include ':core-network'
+include ':common-resource'
+include ':feature:onboard'
+include ':feature:compatibility'
+include ':feature:horoscope'
+include ':feature:profile'

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="onboarding_subtitle">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</string>
+    <string name="onboarding_title">Share your thought</string>
+    <string name="skip">Skip</string>
+    <string name="stay_connected">Stay connected</string>
+    <string name="subtitle2">Prophetic dreams are higher messages, sent by higher messengers, for higher purposes.</string>
+    <string name="daily_horoscope">Start your week off on the right foot with your daily horoscope!</string>
+    <string name="future">Do you want to know your future?</string>
+    <string name="get_started">GET STARTED</string>
+    <string name="continue_text" tools:ignore="ExtraTranslation">CONTINUE</string>
+    <string name="tell_your_gender" tools:ignore="ExtraTranslation">, in order to see how the stars will influence you, we would like to ask for your gender,</string>
+    <string name="ok" tools:ignore="ExtraTranslation">OK, </string>
+    <string name="select_your_gender">Select your gender</string>
+    <string name="pick_sentiments">, Pick your sentimental status, so I can advise you about your love life.</string>
+    <string name="select_status">Select your sentimental status</string>
+    <string name="select_dob">Select your date of birth</string>
+    <string name="more_than">More than 70% of users are using already the app</string>
+    <string name="dob_title">It will help me generate a personalized horoscope, numerology and compatibility report.</string>
+    <string name="place_ofb">What\'s your place of birth?</string>
+    <string name="city">CITY</string>
+    <string name="palm_scan">, I need to scan one of your palms</string>
+    <string name="follow_palm">Follow the on-screen instructions, that way I can analyze your palm lines and read your love, health and life lines.</string>
+    <string name="scan_pam">SCAN YOUR PALM</string>
+    <string name="request_allow_permissions">Allow permission</string>
+    <string name="app_name">AstroYoga</string>
+    <string name="horoscope_remiders">Horoscope reminders</string>
+    <string name="remind_about_horoscope">Enable push notifications and I will send you daily reminders about new horoscope.</string>
+    <string name="enable_rem">ENABLE REMINDER</string>
+    <string name="select_tob">Select your time of birth</string>
+</resources>

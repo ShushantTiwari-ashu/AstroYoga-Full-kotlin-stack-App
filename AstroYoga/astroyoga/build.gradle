@@ -1,0 +1,131 @@
+import com.shushant.astroyoga.buildSrc.App
+import com.shushant.astroyoga.buildSrc.Deps
+
+plugins {
+    id 'com.github.ben-manes.versions'
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk App.compileSdkVersion
+
+    defaultConfig {
+        applicationId App.astroYogaAppId
+        targetSdkVersion App.targetSdkVersion
+        minSdkVersion App.minSdkVersion
+        versionCode App.versionCode
+        versionName "${App.versionName}"
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+    buildTypes {
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+        release {
+            // Using debug signing configs as of now
+            signingConfig signingConfigs.debug
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Deps.Android.Compose.compilerVersion
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+    namespace App.astroYogaAppId
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    implementation Deps.Kotlin.coroutinesAndroid
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    kapt Deps.Android.Lifecycle.compiler
+
+    // koin
+    implementation Deps.Koin.koinAndroid
+    implementation Deps.Koin.koinAndroidNavigation
+    implementation Deps.Koin.koinCompose
+
+    // OTHER
+    api Deps.Kotlin.stdlib
+    api Deps.Kotlin.coroutinesCore
+    api Deps.Kotlin.coroutinesAndroid
+
+
+    // android
+    api Deps.Android.activityCompose
+    api Deps.Android.splashScreen
+
+    api Deps.Android.navigationCompose
+
+    api Deps.Android.Compose.ui
+    api Deps.Android.Compose.uiUtil
+    api Deps.Android.Compose.foundation
+    api Deps.Android.Compose.material3Design
+    api Deps.Android.Compose.materialDesignIcons
+    api Deps.Android.Compose.materialDesignIconsExtended
+    api Deps.Android.Compose.constraintLayout
+    api Deps.Android.Compose.liveData
+    api Deps.Android.Compose.activity
+    api Deps.Android.Compose.viewModels
+
+    api Deps.Android.Accompanist.insets
+    api Deps.Android.Accompanist.insetsUi
+    api Deps.Android.Accompanist.systemUiController
+    api Deps.Android.Accompanist.navigationMaterial
+    api Deps.Android.Accompanist.navigationAnimation
+
+    api Deps.Android.Lifecycle.runtime
+    api Deps.Android.Lifecycle.runtimeKtx
+    kapt Deps.Android.Lifecycle.compiler
+    api Deps.Android.Lifecycle.extensions
+    api Deps.Android.Lifecycle.vmKotlin
+    api Deps.Android.Lifecycle.vmSavedState
+    implementation project(Deps.Modules.Navigation)
+    implementation project(Deps.Modules.FeatureOnBoard)
+    implementation project(Deps.Modules.FeatureCompatibility)
+    implementation project(Deps.Modules.FeatureHoroscope)
+    implementation project(Deps.Modules.FeatureProfile)
+    implementation project(Deps.Modules.CoreData)
+    implementation project(Deps.Modules.CommonResource)
+    testImplementation(Deps.Utils.junit)
+    testImplementation(Deps.Utils.junit)
+
+    api Deps.Utils.timber
+
+    coreLibraryDesugaring Deps.Android.desugaring
+}

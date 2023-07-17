@@ -1,0 +1,110 @@
+/*
+ * Copyright (c) 2023 Shushant Tiwari.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
+import com.shushant.astroyoga.buildSrc.App
+import com.shushant.astroyoga.buildSrc.Deps
+
+plugins {
+    id "com.android.library"
+    id "kotlin-android"
+    id "kotlin-kapt"
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdkVersion App.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion App.minSdkVersion
+
+        vectorDrawables.useSupportLibrary = true
+    }
+
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion Deps.Android.Compose.compilerVersion
+    }
+    lint {
+        disable 'GradleCompatible'
+    }
+    namespace 'com.shushant.astroyoga.common.compose'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Android
+    api Deps.Android.navigationCompose
+    implementation project(Deps.Modules.CommonResource)
+
+    api Deps.Android.Compose.ui
+    api Deps.Android.Compose.material3Design
+    api Deps.Android.Compose.material3WindowSize
+    api Deps.Android.Compose.uiUtil
+    api Deps.Android.Compose.uiTooling
+    api Deps.Android.Compose.foundation
+    api Deps.Android.Compose.materialDesignIcons
+    api Deps.Android.Compose.materialDesignIconsExtended
+    api Deps.Android.Compose.constraintLayout
+    api Deps.Android.Compose.activity
+    api Deps.Android.Compose.viewModels
+    api Deps.Android.Compose.lifecycleRuntime
+    api Deps.Android.Compose.liveData
+    api Deps.Android.Compose.paging
+
+    // Accompanist
+    api Deps.Android.Accompanist.insets
+    api Deps.Android.Accompanist.insetsUi
+    api Deps.Android.Accompanist.pager
+    api Deps.Android.Accompanist.pagerIndicators
+    api Deps.Android.Accompanist.placeholder
+    api Deps.Android.Accompanist.systemUiController
+    api Deps.Android.Accompanist.navigationMaterial
+    api Deps.Android.Accompanist.navigationFlowlayout
+    api Deps.Android.Accompanist.navigationAnimation
+    api Deps.Android.Accompanist.permissions
+    api Deps.Utils.lottie
+    api Deps.Utils.coil
+    api Deps.Utils.coilCompose
+    api Deps.Utils.coilSvg
+    api Deps.Utils.timber
+    api Deps.Utils.cameraLifecycle
+    api Deps.Utils.cameraVideo
+    api Deps.Utils.cameraView
+    api Deps.Utils.cameraExtension
+    api Deps.Utils.wheelPicker
+    api Deps.Utils.camposer
+    api Deps.Utils.zxingLib
+    api Deps.Utils.permission
+    implementation 'androidx.browser:browser:1.4.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+
+    coreLibraryDesugaring Deps.Android.desugaring
+
+    // 3rd party
+    api Deps.Android.Compose.coil
+}
